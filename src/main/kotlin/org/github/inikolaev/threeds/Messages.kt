@@ -324,16 +324,16 @@ enum class ActionInd(val value: String) {
     MODIFY("M")
 }
 
-data class CardRangeData(
+data class CardRange(
     val acsEndProtocolVersion: String,
-    val acsInfoInd: Array<String>?,
+    val acsInfoInd: Array<String>? = null,
     val acsStartProtocolVersion: String,
     val actionInd: ActionInd?,
-    val dsEndProtocolVersion: String?,
-    val dsStartProtocolVersion: String?,
+    val dsEndProtocolVersion: String? = null,
+    val dsStartProtocolVersion: String? = null,
     val endRange: String,
     val startRange: String,
-    val threeDSMethodURL: String?,
+    val threeDSMethodURL: String? = null,
 )
 
 /**
@@ -342,12 +342,12 @@ data class CardRangeData(
  */
 data class PReq(
     val threeDSServerRefNumber: String,
-    val threeDSServerOperatorID: String,
+    val threeDSServerOperatorID: String? = null,
     val threeDSServerTransID: String,
-    val messageExtension: String,
-    val messageType: String,
+    val messageExtension: String? = null,
+    val messageType: String = "PReq",
     val messageVersion: String,
-    val serialNum: String,
+    val serialNum: String? = null,
 )
 
 /**
@@ -358,14 +358,14 @@ data class PReq(
  */
 data class PRes(
     val threeDSServerTransID: String,
-    val cardRangeData: Array<CardRangeData>,
+    val cardRangeData: List<CardRange>? = null,
     val dsEndProtocolVersion: String,
     val dsStartProtocolVersion: String,
     val dsTransID: String,
-    val messageExtension: String,
-    val messageType: String,
+    val messageExtension: String? = null,
+    val messageType: String = "PRes",
     val messageVersion: String,
-    val serialNum: String,
+    val serialNum: String? = null,
 )
 
 enum class ErrorComponent {
@@ -376,17 +376,17 @@ enum class ErrorComponent {
 }
 
 data class Erro(
-    val threeDSServerTransID: String?,
-    val acsTransID: String?,
-    val dsTransID: String?,
+    val threeDSServerTransID: String? = null,
+    val acsTransID: String? = null,
+    val dsTransID: String? = null,
     val errorCode: String,
     val errorComponent: ErrorComponent,
     val errorDescription: String,
     val errorDetail: String,
-    val errorMessageType: String?,
+    val errorMessageType: String? = null,
     val messageType: String,
     val messageVersion: String,
-    val sdkTransID: String?,
+    val sdkTransID: String? = null,
 )
 
 
@@ -398,11 +398,11 @@ data class Erro(
 /**
  * Payer Authentication, equivalent to CReq/CRes + RReq/RRes
  */
-data class PAReq()
-data class PARes()
+data class PAReq(val placeholder: String? = null)
+data class PARes(val placeholder: String? = null)
 
 /**
  * Verify Enrolment, equivalent to AReq/ARes
  */
-data class VEReq()
-data class VERes()
+data class VEReq(val placeholder: String? = null)
+data class VERes(val placeholder: String? = null)

@@ -1,8 +1,28 @@
 package org.github.inikolaev.threeds
 
 import java.lang.RuntimeException
+import java.util.*
 
 class DirectoryServer(val threeDSServer: ThreeDSServer, val accessControlServer: AccessControlServer) {
+    private val cardRangeData = mutableListOf<CardRange>()
+
+    fun addCardRange(cardRange: CardRange) {
+        cardRangeData.add(cardRange)
+    }
+
+    fun process(request: PReq): PRes {
+        println("Processing PReq: $request")
+        val response = PRes(
+            cardRangeData = cardRangeData.toList(),
+            dsEndProtocolVersion = "2.1.0",
+            dsStartProtocolVersion = "2.1.0",
+            dsTransID = UUID.randomUUID().toString(),
+            messageVersion = "2.1.0",
+            threeDSServerTransID = request.threeDSServerTransID,
+        )
+        return response
+    }
+
     fun process(request: AReq): ARes {
         println("Processing AReq: $request")
         return accessControlServer.process(request)
@@ -22,11 +42,11 @@ class AccessControlServer(val directoryServer: DirectoryServer) {
 
     fun process(request: CReq): CRes {
         println("Processing CReq: $request")
-        val resultsRequest = RReq()
-        val resultsResponse = directoryServer.process(resultsRequest)
-        val challengeResponse = CRes()
-
-        return challengeResponse
+        //val resultsRequest = RReq()
+        //val resultsResponse = directoryServer.process(resultsRequest)
+        //val challengeResponse = CRes()
+        //return challengeResponse
+        TODO()
     }
 }
 
@@ -39,9 +59,9 @@ data class PaymentResponse(val status: PaymentStatus)
 
 class ThreeDSServer(val directoryServer: DirectoryServer) {
     fun process(paymentRequest: PaymentRequest): PaymentResponse {
-        val authorizationRequest = AReq()
-        val authorizationResponse = directoryServer.process(authorizationRequest)
-        val paymentResponse = PaymentResponse()
+        //val authorizationRequest = AReq()
+        //val authorizationResponse = directoryServer.process(authorizationRequest)
+        val paymentResponse = PaymentResponse(PaymentStatus.AUTHENTICATED)
 
         return paymentResponse
     }
@@ -79,14 +99,14 @@ class Requestor(val threeDSServer: ThreeDSServer, val threeDSSDK: ThreeDSSDK) {
     }
 }
 
-data class ChallengeRequest()
-data class ChallengeResponse()
+data class ChallengeRequest(val placeholder: String? = null)
+data class ChallengeResponse(val placeholder: String? = null)
 
 class ThreeDSSDK(val accessControlServer: AccessControlServer) {
     fun challenge(challengeRequest: ChallengeRequest): ChallengeResponse {
         println("Processing challenge request: $challengeRequest")
-        val creq = CReq()
-        val cres = accessControlServer.process(creq)
+//        val creq = CReq()
+//        val cres = accessControlServer.process(creq)
         val challengeResponse = ChallengeResponse()
         return challengeResponse
     }
