@@ -141,7 +141,7 @@ data class AReq(
     val merchantRiskIndicator: String,
     val messageCategory: String,
     val messageExtension: String,
-    val messageType: String,
+    val messageType: String = "AReq",
     val messageVersion: String,
     val notificationURL: String,
     val purchaseAmount: String,
@@ -185,7 +185,7 @@ data class ARes(
     val dsTransID: String,
     val eci: String,
     val messageExtension: String,
-    val messageType: String,
+    val messageType: String = "ARes",
     val messageVersion: String,
     val sdkTransID: String,
     val transStatus: String,
@@ -216,7 +216,7 @@ data class CReq(
     val challengeNoEntry: String,
     val challengeWindowSize: String,
     val messageExtension: String,
-    val messageType: String,
+    val messageType: String = "CReq",
     val messageVersion: String,
     val oobContinue: String,
     val resendChallenge: String,
@@ -254,7 +254,7 @@ data class CRes(
     val expandInfoText: String,
     val issuerImage: String,
     val messageExtension: String,
-    val messageType: String,
+    val messageType: String = "CRes",
     val messageVersion: String,
     val oobAppURL: String,
     val oobAppLabel: String,
@@ -288,7 +288,7 @@ data class RReq(
     val interactionCounter: String,
     val messageCategory: String,
     val messageExtension: String,
-    val messageType: String,
+    val messageType: String = "RReq",
     val messageVersion: String,
     val sdkTransID: String,
     val transStatus: String,
@@ -308,7 +308,7 @@ data class RRes(
     val acsTransID: String,
     val dsTransID: String,
     val messageExtension: String,
-    val messageType: String,
+    val messageType: String = "RRes",
     val messageVersion: String,
     val resultsStatus: String,
     val sdkTransID: String,
@@ -367,6 +367,28 @@ data class PRes(
     val messageVersion: String,
     val serialNum: String,
 )
+
+enum class ErrorComponent {
+    C, // 3DS SDK
+    S, // 3DS Server
+    D, // DS
+    A, // ACS
+}
+
+data class Erro(
+    val threeDSServerTransID: String?,
+    val acsTransID: String?,
+    val dsTransID: String?,
+    val errorCode: String,
+    val errorComponent: ErrorComponent,
+    val errorDescription: String,
+    val errorDetail: String,
+    val errorMessageType: String?,
+    val messageType: String,
+    val messageVersion: String,
+    val sdkTransID: String?,
+)
+
 
 /**
  * These are part of 3DS 1.0 and uses XML instead of JSON
