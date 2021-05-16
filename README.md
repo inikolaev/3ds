@@ -24,7 +24,11 @@ Basic implementation of 3-D Secure components for educational purposes:
 * https://github.com/rbkmoney/three-ds-server-compose
 
 
-### 3-D Secure Challenge Flow
+### 3-D Secure 2.0 Challenge Flow
 
 <img src="images/3ds20-challenge.png">
 <img src="images/3ds20-challenge-sequence-diagram.png">
+
+### 3-D Secure 1.0 Flow
+
+<img src="images/3ds10-flow.png">

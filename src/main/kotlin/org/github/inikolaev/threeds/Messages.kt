@@ -402,7 +402,8 @@ data class PAReq(val placeholder: String? = null)
 data class PARes(val placeholder: String? = null)
 
 /**
- * Verify Enrolment, equivalent to AReq/ARes
+ * Verification request, used to check whether card is enrolled into 3DS before attempting it
+ * Equivalent to AReq/ARes
  */
 data class VEReq(val placeholder: String? = null)
 data class VERes(val placeholder: String? = null)
