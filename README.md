@@ -8,6 +8,15 @@ Basic implementation of 3-D Secure components for educational purposes:
 * Directory Server
 * Access Control Server
 
+### 3DS 1.x vs 3DS 2.x
+
+|Transaction Phase                        |3DS 1.x    |3DS 2.x              |
+|-----------------------------------------|-----------|---------------------|
+|Card range load                          |CRReq/CRRes|PReq/PRes            |
+|Participation/enrollment check           |VEReq/VERes|AReq/ARes            |
+|Frictionless authentication              |N/A        |Part of AReq/ARes    |
+|Challenge authentication and confirmation|PAReq/PARes|CReq/CRes + RReq/RRes|
+
 ### Other implementations of 3-D Secure components
 
 * https://github.com/rbkmoney/three-ds-server
